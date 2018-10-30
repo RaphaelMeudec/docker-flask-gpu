@@ -3,15 +3,12 @@ Define the REST verbs relative to the classification
 """
 from flask_restful import Resource
 
-from keras.applications import ResNet50
 from keras.applications.resnet50 import preprocess_input
 from keras.preprocessing import image
 import numpy as np
 import tensorflow as tf
 
 global model
-model = ResNet50()
-
 
 
 class ClassificationResource(Resource):

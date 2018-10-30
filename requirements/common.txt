@@ -2,4 +2,3 @@ Flask==1.0.2
 Flask-RESTful==0.3.6
 Keras==2.2.4
 Pillow==5.3.0
-tensorflow==1.9.0

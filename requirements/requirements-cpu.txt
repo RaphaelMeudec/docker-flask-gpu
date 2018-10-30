@@ -1,0 +1,2 @@
+-r requirements/common.txt
+tensorflow==1.9.0

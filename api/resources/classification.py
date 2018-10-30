@@ -10,9 +10,10 @@ import numpy as np
 import tensorflow as tf
 
 global model
-model = ResNet50()
 global graph
-graph = tf.get_default_graph()
+if model is None:
+    model = ResNet50()
+    graph = tf.get_default_graph()
 
 class ClassificationResource(Resource):
     @staticmethod

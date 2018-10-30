@@ -24,6 +24,5 @@ class ClassificationResource(Resource):
 
         with graph.as_default():
             results = model.predict(x)
-            print(results, flush=True)
 
         return 'prediction done!'

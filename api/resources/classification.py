@@ -9,4 +9,5 @@ from keras.applications import ResNet50
 class ClassificationResource(Resource):
     @staticmethod
     def get():
-        return 'hello world!'
+        model = ResNet50()
+        return 'model loaded!'

@@ -11,9 +11,9 @@ import tensorflow as tf
 
 global model
 global graph
-if model is None:
-    model = ResNet50()
-    graph = tf.get_default_graph()
+model = ResNet50()
+graph = tf.get_default_graph()
+
 
 class ClassificationResource(Resource):
     @staticmethod

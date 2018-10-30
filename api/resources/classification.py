@@ -10,9 +10,8 @@ import numpy as np
 import tensorflow as tf
 
 global model
-global graph
 model = ResNet50()
-graph = tf.get_default_graph()
+
 
 
 class ClassificationResource(Resource):
@@ -23,7 +22,7 @@ class ClassificationResource(Resource):
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
 
-        with graph.as_default():
+        with tf.get_default_graph():
             results = model.predict(x)
 
         return 'prediction done!'

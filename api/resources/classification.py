@@ -1,25 +1,38 @@
 """
 Define the REST verbs relative to the classification
 """
-from flask_restful import Resource
+import io
 
-from keras.applications.resnet50 import preprocess_input
-from keras.preprocessing import image
+from keras.preprocessing.image import img_to_array
+from keras.applications import imagenet_utils
 import numpy as np
-import tensorflow as tf
+from PIL import Image
 
-global model
+from api.models import INITIALIZED_MODELS
 
 
 class ClassificationResource(Resource):
     @staticmethod
     def get():
-        img = image.load_img('assets/cat.jpg', target_size=(224, 224))
-        x = image.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
-        x = preprocess_input(x)
 
-        with tf.get_default_graph():
-            results = model.predict(x)
+        image = Image.open(io.BytesIO(image))
+        image = prepare_image(image, target=(224, 224))
+
+        predictions = INITIALIZED_MODELS['resnet50'].predict(image)
 
         return 'prediction done!'
+
+
+def prepare_image(image, target):
+    # if the image mode is not RGB, convert it
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+
+    # resize the input image and preprocess it
+    image = image.resize(target)
+    image = img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    image = imagenet_utils.preprocess_input(image)
+
+    # return the processed image
+    return image

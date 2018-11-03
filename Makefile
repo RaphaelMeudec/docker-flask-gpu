@@ -6,3 +6,6 @@ build/gpu:
 
 start:
 	docker run -it -p 80:8000 docker-flask-gpu
+
+deploy:
+	docker stack deploy -c docker-compose.yml deep_api

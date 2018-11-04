@@ -1,17 +1,13 @@
 """
 Define the REST verbs relative to the classification
 """
-import io
-
 from flask import jsonify
 from flask_restful import Resource
 from keras.applications import imagenet_utils
-from keras.preprocessing.image import img_to_array
-import numpy as np
 from PIL import Image
 
 from api.models.models import REFERENCE_GRAPH, INITIALIZED_MODELS
-
+from api.models.utils import prepare_image
 
 class ClassificationResource(Resource):
     @staticmethod
@@ -33,18 +29,3 @@ class ClassificationResource(Resource):
 
 
         return jsonify(predictions)
-
-
-def prepare_image(image, target):
-    # if the image mode is not RGB, convert it
-    if image.mode != "RGB":
-        image = image.convert("RGB")
-
-    # resize the input image and preprocess it
-    image = image.resize(target)
-    image = img_to_array(image)
-    image = np.expand_dims(image, axis=0)
-    image = imagenet_utils.preprocess_input(image)
-
-    # return the processed image
-    return image

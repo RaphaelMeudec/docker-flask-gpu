@@ -18,14 +18,12 @@ class ClassificationResource(Resource):
         with REFERENCE_GRAPH.as_default():
             predictions = INITIALIZED_MODELS['resnet50'].predict(image)
 
-        results = imagenet_utils.decode_predictions(predictions)
-        predictions = []
-
-        # loop over the results and add them to the list of
-        # returned predictions
-        for (imagenetID, label, prob) in results[0]:
-            r = {"label": label, "probability": float(prob)}
-            predictions.append(r)
-
+        results = imagenet_utils.decode_predictions(predictions)[0]
+        predictions = {
+            {
+                "label": class_label,
+                "probability": float(class_probability),
+            } for (_, class_label, class_probability) in results
+        }
 
         return jsonify(predictions)

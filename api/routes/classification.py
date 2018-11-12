@@ -4,7 +4,7 @@ Defines the blueprint for the Classification
 from flask import Blueprint
 from flask_restful import Api
 
-from resources import ClassificationResource
+from api.resources import ClassificationResource
 
 
 CLASSIFICATION_BLUEPRINT = Blueprint('classification', __name__)

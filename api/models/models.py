@@ -1,3 +1,5 @@
+""" Instanciates all the models and the associated graph for the API """
+
 from keras.applications import ResNet50
 import tensorflow as tf
 

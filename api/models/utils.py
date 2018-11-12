@@ -1,9 +1,18 @@
+""" Utilities functions for the models such as imge preprocessing """
+
 import numpy as np
 from keras.applications import imagenet_utils
 from keras.preprocessing.image import img_to_array
 
 
 def prepare_image(image, target):
+    """
+    Apply preprocessing to a loaded image
+
+    :param image: Pillow image
+    :param target: Target size for the image
+    :return: Preprocessed image as np.array
+    """
     # if the image mode is not RGB, convert it
     if image.mode != "RGB":
         image = image.convert("RGB")

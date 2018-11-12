@@ -10,8 +10,12 @@ from api.models.models import REFERENCE_GRAPH, INITIALIZED_MODELS
 from api.models.utils import prepare_image
 
 class ClassificationResource(Resource):
+    """
+    Resource for the /classify route
+    """
     @staticmethod
     def get():
+        """ Implementation of the GET route which returns a prediction of a saved image """
         image = Image.open('assets/cat.jpg')
         image = prepare_image(image, target=(224, 224))
 

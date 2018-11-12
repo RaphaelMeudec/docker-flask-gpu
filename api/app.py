@@ -1,6 +1,6 @@
 from flask import Flask
 
-from routes import CLASSIFICATION_BLUEPRINT
+from api.routes import CLASSIFICATION_BLUEPRINT
 
 
 server = Flask(__name__)
